@@ -11,16 +11,11 @@ Cambiar a formato de puntuación y fecha, duplicados, nulos y registros sin sent
 
 class DateFormat:
 
-    def __init__(self, m_columna, dataframe, d_columna):#, profit, bet, co, result, dropid, dropgameid):
+    def __init__(self, m_columna, dataframe, d_columna):
         self.monto_columna=m_columna
         self.dataframe=dataframe
         self.date_columna=d_columna
-        #self.prof_columna=profit
-        #self.bet_columna=bet
-        #self.co_columna=co
-        #self.result_columna=result
-        #self.drop_id=dropid
-        #self.drop_gameid=dropgameid
+
 
     def format(self):
         self.dataframe[self.monto_columna]=self.dataframe[self.monto_columna].str.replace(',', '.').astype(float)
@@ -43,10 +38,15 @@ class DateFormat:
         self.dataframe=self.dataframe[self.dataframe[self.monto_columna]>0]
         return self.dataframe
     
+    def reset_index(self):
+        self.dataframe=self.dataframe.reset_index()
+        self.dataframe=self.dataframe.drop("index",axis=1)
+
     def ejec_dateformat(self):
         self.format()
         self.fecha()
         self.duplicados()
         self.nulos()
         self.eliminar_reg()
+        self.reset_index()
         return self.dataframe
