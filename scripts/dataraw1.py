@@ -41,6 +41,7 @@ class DateFormat:
     def reset_index(self):
         self.dataframe=self.dataframe.reset_index()
         self.dataframe=self.dataframe.drop("index",axis=1)
+        return self.dataframe
 
     def ejec_dateformat(self):
         self.format()
