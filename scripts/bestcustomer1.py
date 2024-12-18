@@ -47,19 +47,19 @@ class BestCustomers:
         self.dataframe[self.Frecuency_columna]=self.dataframe[self.Frecuency_columna].astype(int)
         return self.dataframe
 
-    def eliminar_esp(self):
-        self.dataframe2.columns = self.dataframe2.columns.str.strip()
-        return self.dataframe2
+    #def eliminar_esp(self):
+    #    self.dataframe.columns = self.dataframe.columns.str.strip()
+    #    return self.dataframe2
     
-    #def final(self):
-    #    pd.merge(self.dataframe, self.dataframe2[[self.seg_columna, self.id_columna]], on=self.id_columna)
-    #    return self.dataframe
+    def final(self):
+        self.dataframe=pd.merge(self.dataframe2, self.dataframe[[self.seg_columna, self.id_columna]], on=self.id_columna)
+        return self.dataframe
 
     def ejec_bestcustomer(self):
         self.category()
         self.RFM_Score()
         self.mapp()
         self.int()
-        self.eliminar_esp()
-        #self.final()
+    #   self.eliminar_esp()
+        self.final()
         return self.dataframe
